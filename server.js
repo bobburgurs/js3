@@ -1,17 +1,17 @@
-const express = require("express");
+const express = require('express');
+
 const app = express();
 
-// Make sure the server is listening on port 3000
-app.listen(3000, () => {
-  console.log("Server is listening on port 3000");
+app.use(express.static('./public'));
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
 });
 
-// When the client sends a GET request to the / endpoint, send the index.html file
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/src/pages/index.html");
+app.post('/', function(req, res) {
+  res.sendFile(__dirname + '/submitted.html');
 });
 
-// When the client sends a POST request to the / endpoint, send the submitted.html file
-app.post("/", (req, res) => {
-  res.sendFile(__dirname + "/src/pages/submitted.html");
+app.listen(3000, function() {
+  console.log('Server is running on port 3000.');
 });
